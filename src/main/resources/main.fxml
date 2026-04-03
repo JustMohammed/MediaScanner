@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.mediascanner.MainController"
+      styleClass="root-container" spacing="0">
+
+    <VBox styleClass="header" spacing="4">
+        <Label text="MediaScanner" styleClass="app-title"/>
+        <Label text="Scan your PC for images and videos" styleClass="app-subtitle"/>
+    </VBox>
+
+    <HBox styleClass="toolbar" spacing="12" alignment="CENTER_LEFT">
+        <VBox.margin><Insets/></VBox.margin>
+
+        <Label text="Drive / Folder:" styleClass="toolbar-label"/>
+        <ComboBox fx:id="driveCombo" styleClass="drive-combo" prefWidth="160"/>
+        <Button fx:id="browseBtn" text="📁  Browse" onAction="#onBrowse" styleClass="btn-secondary"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="cancelBtn" text="✕  Cancel" onAction="#onCancel" styleClass="btn-danger"/>
+        <Button fx:id="scanBtn" text="⚡  Scan Now" onAction="#onScan" styleClass="btn-primary"/>
+    </HBox>
+
+    <VBox styleClass="progress-area" spacing="4">
+        <ProgressBar fx:id="progressBar" prefWidth="1e9" prefHeight="6"/>
+        <HBox spacing="16">
+            <Label fx:id="statusLabel" text="Select a drive or folder and click Scan Now" styleClass="status-label" HBox.hgrow="ALWAYS"/>
+            <Label fx:id="statsLabel" text="" styleClass="stats-label"/>
+        </HBox>
+    </VBox>
+
+    <HBox styleClass="filter-bar" spacing="12" alignment="CENTER_LEFT">
+        <Label text="🔍" styleClass="search-icon"/>
+        <TextField fx:id="searchField" promptText="Search by name, path, or extension..." styleClass="search-field" HBox.hgrow="ALWAYS"/>
+        
+        <Separator orientation="VERTICAL"/>
+        
+        <Label text="Format:" styleClass="toolbar-label"/>
+        <ComboBox fx:id="extensionCombo" prefWidth="110" styleClass="filter-combo"/>
+
+        <Separator orientation="VERTICAL"/>
+
+        <Label text="Filter:" styleClass="toolbar-label"/>
+        <ToggleButton fx:id="filterAll" text="All" styleClass="filter-btn"/>
+        <ToggleButton fx:id="filterImages" text="🖼 Images" styleClass="filter-btn"/>
+        <ToggleButton fx:id="filterVideos" text="🎬 Videos" styleClass="filter-btn"/>
+    </HBox>
+
+    <TableView fx:id="tableView" VBox.vgrow="ALWAYS" styleClass="media-table">
+        <columns>
+            <TableColumn fx:id="colName" text="File Name" prefWidth="260"/>
+            <TableColumn fx:id="colType" text="Type" prefWidth="80"/>
+            <TableColumn fx:id="colExtension" text="Format" prefWidth="70"/>
+            <TableColumn fx:id="colSize" text="Size" prefWidth="90"/>
+            <TableColumn fx:id="colPath" text="Location" prefWidth="500"/>
+        </columns>
+        <placeholder>
+            <Label text="No files found yet. Select a drive and click Scan Now." styleClass="placeholder-label"/>
+        </placeholder>
+    </TableView>
+
+    <HBox styleClass="footer" alignment="CENTER">
+        <Label text="Double-click any row to open its folder in Explorer" styleClass="footer-hint"/>
+    </HBox>
+
+</VBox>
