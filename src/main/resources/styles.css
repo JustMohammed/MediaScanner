@@ -347,3 +347,21 @@
     -fx-text-fill: #e2e8f0;
     -fx-border-color: #2d3148;
 }
+.media-table {
+    -fx-background-color: #1a1d2e;
+    -fx-control-inner-background: #1a1d2e; /* This fixes the white area */
+    -fx-background-insets: 0;
+}
+
+.media-table .column-header, .media-table .column-header-background {
+    -fx-background-color: #252a41;
+}
+
+.media-table .table-row-cell {
+    -fx-background-color: #1a1d2e;
+    -fx-text-fill: white;
+}
+
+.media-table .table-row-cell:selected {
+    -fx-background-color: #6366f1;
+}

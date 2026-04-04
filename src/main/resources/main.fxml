@@ -1,56 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
 
 <VBox fx:id="rootVBox" spacing="0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mediascanner.MainController" styleClass="root-container">
     
-    <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: #1a1d2e; -fx-padding: 10 15 10 15;">
-        <Label text="MediaScanner — Find Your Files" style="-fx-text-fill: #6366f1; -fx-font-weight: bold; -fx-font-size: 14px;" />
+    <HBox fx:id="titleBar" alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: #1a1d2e; -fx-padding: 10 15 10 15;">
+        <Label text="MediaScanner" style="-fx-text-fill: #6366f1; -fx-font-weight: bold; -fx-font-size: 14px;" />
         <Region HBox.hgrow="ALWAYS" />
         <HBox spacing="5" alignment="CENTER_RIGHT">
-            <Button text="—" onAction="#handleMinimize" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 14px;" />
-            <Button text="🗖" onAction="#handleMaximize" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 14px;" />
-            <Button text="✕" onAction="#handleClose" style="-fx-background-color: transparent; -fx-text-fill: #ef4444; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 14px;" />
+            <Button text="—" onAction="#handleMinimize" style="-fx-background-color: transparent; -fx-text-fill: white;" />
+            <Button text="🗖" onAction="#handleMaximize" style="-fx-background-color: transparent; -fx-text-fill: white;" />
+            <Button text="✕" onAction="#handleClose" style="-fx-background-color: transparent; -fx-text-fill: #ef4444;" />
         </HBox>
     </HBox>
 
     <VBox spacing="10" VBox.vgrow="ALWAYS" style="-fx-padding: 20;">
-        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="toolbar">
-            <ComboBox fx:id="driveCombo" prefWidth="150" styleClass="drive-combo" />
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <ComboBox fx:id="driveCombo" prefWidth="120" />
             <Button fx:id="browseBtn" text="Browse Folder" onAction="#handleBrowse" styleClass="btn-secondary" />
             <Button fx:id="scanBtn" text="Start Scan" onAction="#onScan" styleClass="btn-primary" />
             <Button fx:id="cancelBtn" text="Cancel" onAction="#onCancel" styleClass="btn-secondary" />
-            <Button text="Delete Selected" onAction="#handleDelete" styleClass="btn-danger" />
+            <Button text="Delete" onAction="#handleDelete" styleClass="btn-danger" />
+            <Button text="Zip Selected" onAction="#handleZip" styleClass="btn-primary" />
             <Region HBox.hgrow="ALWAYS" />
-            <Label text="Search:" styleClass="toolbar-label" />
-            <TextField fx:id="searchField" promptText="Filter files..." styleClass="search-field" />
+            <TextField fx:id="searchField" promptText="Search..." styleClass="search-field" />
         </HBox>
 
-        <VBox spacing="5" styleClass="progress-area">
-            <ProgressBar fx:id="progressBar" maxWidth="Infinity" />
-            <HBox spacing="20">
-                <Label fx:id="statusLabel" text="Ready to scan" styleClass="status-label" />
-                <Region HBox.hgrow="ALWAYS" />
-                <Label fx:id="statsLabel" styleClass="stats-label" />
-            </HBox>
-        </VBox>
-
         <HBox spacing="15" alignment="CENTER_LEFT" styleClass="filter-bar">
-            <ToggleButton fx:id="filterAll" text="All Files" styleClass="filter-btn" />
-            <ToggleButton fx:id="filterImages" text="Images" styleClass="filter-btn" />
-            <ToggleButton fx:id="filterVideos" text="Videos" styleClass="filter-btn" />
+            <ToggleButton fx:id="filterAll" text="All" />
+            <ToggleButton fx:id="filterImages" text="Images" />
+            <ToggleButton fx:id="filterVideos" text="Videos" />
+            <Separator orientation="VERTICAL" prefHeight="20" />
+            <Label text="Min Duration:" styleClass="toolbar-label" />
+            <ComboBox fx:id="durationCombo" prefWidth="110" />
             <Region HBox.hgrow="ALWAYS" />
-            <Label text="Format:" styleClass="toolbar-label" />
-            <ComboBox fx:id="extensionCombo" styleClass="filter-combo" prefWidth="120" />
+            <ComboBox fx:id="extensionCombo" prefWidth="120" />
         </HBox>
 
         <TableView fx:id="fileTable" VBox.vgrow="ALWAYS" styleClass="media-table">
             <columns>
                 <TableColumn fx:id="nameColumn" text="File Name" prefWidth="250"/>
-                <TableColumn fx:id="typeColumn" text="Type" prefWidth="100"/>
-                <TableColumn fx:id="pathColumn" text="Full Path" prefWidth="450"/>
+                <TableColumn fx:id="typeColumn" text="Type" prefWidth="80"/>
+                <TableColumn fx:id="durationColumn" text="Duration" prefWidth="100"/>
+                <TableColumn fx:id="dateColumn" text="Date Created" prefWidth="150"/>
+                <TableColumn fx:id="pathColumn" text="Path" prefWidth="400"/>
             </columns>
         </TableView>
+
+        <VBox spacing="5">
+            <ProgressBar fx:id="progressBar" maxWidth="Infinity" progress="0" />
+            <HBox spacing="20">
+                <Label fx:id="statusLabel" text="Ready" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="statsLabel" text="" />
+            </HBox>
+        </VBox>
     </VBox>
 </VBox>
